@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  weatherconsumer:
+    container_name: weatherconsumer
+    image: kafkaconsumer
+    build: .
+    environment:
+      KAFKA_BROKER_URL: broker:9092
+      TOPIC_NAME: weather
+
+  fakerconsumer:
+    container_name: fakerconsumer
+    image: kafkaconsumer
+    environment:
+      KAFKA_BROKER_URL: broker:9092
+      TOPIC_NAME: faker
+
+  airqualityconsumer:
+    container_name: airqualityconsumer
+    image: kafkaconsumer
+    environment:
+      KAFKA_BROKER_URL: broker:9092
+      TOPIC_NAME: airquality
+
+networks:
+  default:
+    external:
+      name: kafka-network
